@@ -8,3 +8,5 @@
 • Lazy Loading
 • Authentication
 • Improving UI
+• Continuous Integration
+
