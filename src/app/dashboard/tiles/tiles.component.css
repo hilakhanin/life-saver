@@ -1,0 +1,70 @@
+.widget {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 29px;
+}
+
+.widget.widget-tile {
+    padding: 24px 20px;
+    margin-bottom: 29px;
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.widget.widget-tile .data-icon {
+    padding: 5px 0;
+    display: table-cell;
+    vertical-align: middle;
+    height: 66px;
+    width: 25%;
+}
+
+.widget.widget-tile .data-info {
+    display: table-cell;
+    text-align: right;
+    padding-top: 10px;
+}
+
+.widget.widget-tile .data-info .desc {
+    font-size: 1.077rem;
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    .widget.widget-tile .data-info .desc {
+        font-size: 0.9rem;
+    }
+}
+
+.widget.widget-tile .data-info .value {
+    font-size: 1.69231rem;
+    font-weight: 300;
+}
+
+.widget-icon .mat-icon {
+    font-size: 50px;
+}
+
+.high {
+    color: #e57373;
+}
+
+.low {
+    color: #a5d6a7;
+}
+
+.sick {
+    color: lightsteelblue;
+}
+
+.connected {
+    color: #26C6A8;
+}
+
+.wait {
+    color: lightslategrey;
+}

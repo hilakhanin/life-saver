@@ -1,0 +1,14 @@
+.mat-card {
+    max-height: 10vh;
+    overflow-y: auto;
+    margin-bottom: 2px;
+    background-color: #ffcccb;
+}
+
+:host ::ng-deep .mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: initial;
+}
+
+.mat-list-item {
+    color: #ba6b6c;
+}

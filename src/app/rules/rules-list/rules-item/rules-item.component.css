@@ -1,0 +1,35 @@
+a {
+    text-decoration: none;
+}
+
+a h4 {
+    color: #2cc185;
+}
+
+.parameters {
+    padding: 2px;
+    width: 33%;
+    max-width: 33%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
+    text-align: center;
+    background-color: rgb(176, 196, 222, 0.2);
+    border-radius: 3px;
+}
+
+.pull-right {
+    color: #343a40;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #2cc185;
+    border-color: #2cc185;
+}
+
+.list-group-item.active h4 {
+    color: white;
+}

@@ -1,0 +1,13 @@
+<a style="cursor: pointer;" [routerLink]="[index]" routerLinkActive="active"
+    class="list-group-item clearfix" style="border-radius: 3px;">
+    <div class="pull-left">
+        <h4 class="lead">{{ rule.Name }}</h4>
+    </div>
+    <div>
+        <div class="d-flex w-100 justify-content-around text-muted">
+            <div class="parameters"><span class="font-weight-bold">Equation: </span><span>{{ rule.Equation }}</span></div>
+            <div class="parameters"><span class="font-weight-bold">Cutoff: </span><span>{{ rule.Cutoff }}</span></div>
+            <div class="parameters"><span class="font-weight-bold">Active? </span><span>{{ rule.IsActive | yesNo }}</span></div>
+        </div>
+    </div>
+</a>

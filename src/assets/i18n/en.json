@@ -1,0 +1,60 @@
+{
+    "app": {
+        "errors": {
+            "axesXAndYAreTheSame": "Please select a different index type for each axis",
+            "xNotBooleanOrYIsBoolean": "When selecting a Bar Chart type, axis X needs to be of a boolean index type and axis Y needs to be of a non-boolean index type",
+            "dialogFileGeneration": "Couldn't generate mock file. Error code: {{ status }}.",
+            "dialogImportErrorLines": "Could not parse the following lines:",
+            "dialogImportErrorSyntax": "Could not import the file due to incorrect syntax.",
+            "duplicateNameValidator": "An index type with this name already exists",
+            "indexTypeEdit": "Minimum value must be smaller than or equal to maximum value.",
+            "validIdCard": "Please enter a valid identity card number",
+            "duplicateIdCard": "A patient with this identity card number already exists",
+            "errorPage": "Oy vey, the page is not found. If you'd put it where it belongs, you could find it.",
+            "barChartAxisCannotBeDates": "When selecting a Bar Chart type, the axes cannot be of date type",
+            "pieChartAxisMustBeBoolean": "When selecting a Pie Chart type, the axis must be boolean",
+            "scatterPlotChartAxisCannotBeDates": "When selecting a Scatter Plot type, the axes cannot be of date type"
+        },
+        "snackbars": {
+            "noPatient": "A Patient with this Id Card does not exist",
+            "noIndexType": "An Index Type with this Id does not exist",
+            "noRule": "A Rule with this Id does not exist"
+        },
+        "charts": {
+            "no": "No ",
+            "not": "Not ",
+            "with": "With ",
+            "without": "Without ",
+            "withPercent": "Yes - {{ percent }}%",
+            "withoutPercent": "No - {{ percent }}%",
+            "dead": "Dead",
+            "researchGroup": "Research Group",
+            "average": "Average ",
+            "score": " Score",
+            "averageScore": "Average {{axisYName}} Score",
+            "totalPatientsWith": "Total Patients with {{ index }}",
+            "totalAlivePatients": "Alive Patients"
+        },
+        "rules": {
+            "elementId": "{{ {{name}} }}",
+            "dialogs": {
+                "nonSecuredEditor": {
+                    "title": "Unsafe Editor Text",
+                    "content": "Some of the text you have entered may be unsafe"
+                },
+                "evaluationError": {
+                    "title": "Equation Could Not Be Evaluated",
+                    "content": "The equation could not be parsed mathematically, as some operations do not match known functions"
+                },
+                "indexTypeError": {
+                    "title": "Index Type Not Found",
+                    "content": "The equation could not be evaluated, because some of the Index Types were not found"
+                }
+            }
+        },
+        "configuration": {
+            "left": "Left",
+            "right": "Right"
+        }
+    }
+}

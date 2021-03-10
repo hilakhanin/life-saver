@@ -1,0 +1,36 @@
+:host ::ng-deep .mat-slide-toggle-content {
+    margin-right: 20px;
+}
+
+:host ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+    background-color: #00d085;
+}
+
+:host ::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+    background-color: lightsteelblue;
+}
+
+:host ::ng-deep .cke_combo_text.cke_combo_inlinelabel {
+    width: 111px;
+}
+
+:host ::ng-deep .cke_button__sqrt_icon:after {
+    content: "√";
+    font-size: 18px;
+    font-weight: bold;
+}
+
+:host ::ng-deep .cke_button__sigma_icon:after {
+    content: "Σ";
+    font-size: 18px;
+}
+
+:host ::ng-deep .cke_button__pi_icon:after {
+    content: "Π";
+    font-size: 18px;
+}
+
+:host ::ng-deep .cke_button__lowerCasePi_icon:after {
+    content: "π";
+    font-size: 18px;
+}

@@ -1,0 +1,135 @@
+.widget {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 29px;
+}
+
+.widget-icon {
+    font-size: 50px;
+    margin-left: 35px;
+}
+
+.widget.widget-fullwidth {
+    padding: 0;
+    height: 474px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.widget.widget-small {
+    margin-bottom: 20px;
+}
+
+.widget-head {
+    margin-bottom: 20px;
+    display: block;
+    background-color: lightsteelblue;
+}
+
+.widget.widget-fullwidth.chart .widget-head {
+    background-color: initial;
+}
+
+.widget.widget-small.widget-fullwidth>.widget-head {
+    padding: 20px 15px 10px;
+}
+
+.widget-head .tools {
+    float: right;
+    margin-left: 10px;
+}
+
+.widget-head .tools .icon {
+    display: inline-block;
+    font-size: 1.615rem;
+    line-height: 1.2;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #3d3d3d;
+    min-width: 1.615rem;
+    text-align: center;
+}
+
+.widget-head .title {
+    display: block;
+    font-size: 1.38462rem;
+    font-weight: 300;
+}
+
+.widget-head .description {
+    display: block;
+    color: #595959;
+    line-height: 22px;
+    font-weight: 300;
+}
+
+.table-wrapper {
+    height: 382px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+mat-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #545454;
+    border-collapse: collapse;
+}
+
+mat-table mat-cell, mat-table mat-header-cell {
+    padding: .9rem;
+    vertical-align: top;
+    border-top: 1px solid #eceeef;
+    max-height: 56px;
+}
+
+.mat-column-name {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 70% !important;
+    width: 70% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.mat-column-type {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 30% !important;
+    width: 30% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+mat-table>mat-row>mat-cell {
+    font-weight: 400;
+    vertical-align: middle;
+}
+
+.material-icons {
+    width: 63px;
+    height: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.mat-row:hover {
+    background-color: lightsteelblue;
+    cursor: pointer;
+}
+
+.current-graph {
+    background-color: #2cc185;
+}

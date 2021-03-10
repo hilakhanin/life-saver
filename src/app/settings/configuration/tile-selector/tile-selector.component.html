@@ -1,0 +1,9 @@
+<span class="d-flex w-100 flex-column">
+    <div class="pt-1 mr-1 align-self-center tile-title">{{ 'app.configuration.' + side | translate }} Tile</div>
+    <div class="mr-1 align-self-center w-100">
+        <select class="form-control" [ngModel]="selfIndex" (change)="onChange($event)" id="{{side}}">
+            <option value="-1">None</option>
+            <option *ngFor="let rule of filteredRuleList" [value]="rule?.Id">{{ rule?.Name }}</option>
+        </select>
+    </div>
+</span>

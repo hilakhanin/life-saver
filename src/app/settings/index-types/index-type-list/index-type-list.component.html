@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button mat-raised-button type="button" (click)="onNewIndexType()">New Index Type</button>
+        <button mat-raised-button type="button" (click)="onFetchData()">Fetch</button>
+        <button mat-raised-button type="button" (click)="onSaveData()">Save</button>
+    </div>
+</div>
+<hr>
+
+<!-- TODO: bug fix: limit list height -->
+<div class="row">
+    <div class="col-xs-12" style="width: 100%;">
+        <app-index-type-item *ngFor="let indexTypeEl of indexTypes; let i = index" [indexType]="indexTypeEl"
+            [index]="i"></app-index-type-item>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+.widget {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 29px;
+}
+
+.widget.widget-fullwidth {
+    padding: 0;
+    height: 474px;
+    overflow-y: auto;
+}
+
+.widget-head {
+    margin-bottom: 20px;
+    display: block;
+    background-color: lightsteelblue;
+}
+
+.widget.widget-fullwidth .widget-head, .widget-chart-container .table-wrapper {
+    padding: 20px 20px 10px;
+    margin-bottom: 0;
+}
+
+.widget.widget-fullwidth.chart .widget-head {
+    background-color: initial;
+}
+
+.widget-head .tools {
+    float: right;
+    margin-left: 10px;
+}
+
+.widget-head .tools .icon {
+    display: inline-block;
+    font-size: 1.615rem;
+    line-height: 1.2;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #3d3d3d;
+    min-width: 1.615rem;
+    text-align: center;
+}
+
+.widget-head .title {
+    display: block;
+    font-size: 1.38462rem;
+    font-weight: 300;
+}
+
+.table-wrapper {
+    position: relative;
+    height: 402px;
+    /* overflow-y: auto; */
+}
+
+.widget-chart-container {
+    position: relative;
+}
+
+.no_data {
+    font-size: 1.75rem;
+    font-weight: 300;
+    text-align: center;
+    line-height: normal;
+    padding: 10px 0;
+}
+
+.blinking {
+    animation: opacity 2s ease-in-out;
+    animation-iteration-count: 3;
+    opacity: 1;
+}
+
+@keyframes opacity {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#fadeInEffect {
+    animation: fadeIn 3s linear;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.no_data mat-icon {
+    font-size: 50px;
+}
+
+canvas {
+    min-height: 350px;
+}
+
+.hidden_canvas {
+    min-height: initial;
+    max-height: 0;
+    visibility: hidden;
+}
+
+.carousel, .carousel-inner, .carousel-item, .picsum-img-wrapper {
+    height: 350px;
+}
+
+.picsum-img-wrapper {
+    width: 80%;
+    margin: 0 10%;
+}
+
+:host ::ng-deep .carousel, :host ::ng-deep .carousel-item.active {
+    border: initial;
+    outline: none;
+}
+
+:host ::ng-deep .carousel-control-next-icon {
+    background-image: url("../../../assets/svg/arrow_forward_ios.svg");
+}
+
+:host ::ng-deep .carousel-control-prev-icon {
+    background-image: url("../../../assets/svg/arrow_back_ios.svg");
+}

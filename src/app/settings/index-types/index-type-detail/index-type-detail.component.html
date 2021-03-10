@@ -1,0 +1,33 @@
+<div class="row mt-5">
+    <div class="col-10 offset-1">
+        <form>
+            <h1>{{ indexType.Name }}</h1>
+            <div ngbDropdown class="d-inline-block mt-1 mb-4">
+                <button class="btn btn-success" ngbDropdownToggle>Manage Index Type</button>
+                <div ngbDropdownMenu>
+                    <button ngbDropdownItem (click)="onEditIndexType()">Edit Index Type</button>
+                    <!-- TODO: When deleting an index type, also delete its dependencies: rules, graphs and results -->
+                    <button ngbDropdownItem (click)="onDeleteIndexType()">Delete Index Type</button>
+                </div>
+            </div>
+
+            <div id="badge_container">
+                <div class="badge_item">
+                    Boolean Result <span class="badge badge-light">{{ indexType.IsBoolean | yesNo }}</span>
+                </div>
+                <div class="badge_item">
+                    Unit of Measurement <span class="badge badge-light">{{ indexType.UnitOfMeasurement }}</span>
+                </div>
+                <div class="badge_item">
+                    Minimum Value <span class="badge badge-light">{{ indexType.MinValue | date }}</span>
+                </div>
+                <div class="badge_item">
+                    Maximum Value <span class="badge badge-light">{{ indexType.MaxValue }}</span>
+                </div>
+                <div class="badge_item" *ngIf="indexType.Increment">
+                    Increment <span class="badge badge-light">{{ indexType.Increment }}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

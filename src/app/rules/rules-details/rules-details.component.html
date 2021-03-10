@@ -1,0 +1,26 @@
+<div class="row mt-5">
+    <div class="col-10 offset-1">
+        <form>
+            <h1>{{ rule.Name }}</h1>
+            <div ngbDropdown class="d-inline-block mt-1 mb-4">
+                <button class="btn btn-success" ngbDropdownToggle>Manage Rule</button>
+                <div ngbDropdownMenu>
+                    <button ngbDropdownItem (click)="onEditRule()">Edit Rule</button>
+                    <button ngbDropdownItem (click)="onDeleteRule()">Delete Rule</button>
+                </div>
+            </div>
+
+            <div id="badge_container">
+                <div class="badge_item">
+                    Active Rule <span class="badge badge-light">{{ rule.IsActive | yesNo }}</span>
+                </div>
+                <div class="badge_item">
+                    Equation <span class="badge badge-light">{{ rule.Equation }}</span>
+                </div>
+                <div class="badge_item">
+                    Cutoff <span class="badge badge-light">{{ rule.Cutoff }}</span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

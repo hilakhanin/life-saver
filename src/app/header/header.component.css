@@ -1,0 +1,83 @@
+.navbar {
+    background-color: #00d085;
+}
+
+.navbar-brand {
+    width: 150px;
+    font-size: 24px;
+}
+
+#bottom_nav .nav.nav-tabs .active, #settings_nav .nav.nav-tabs .active {
+    color: #00d085;
+}
+
+.navbar#bottom_nav, .navbar#settings_nav {
+    padding-bottom: 0;
+}
+
+.navbar#bottom_nav .col-lg-6:first-child, .navbar#settings_nav .col-lg-6:first-child {
+    padding-bottom: 0;
+}
+
+.navbar#bottom_nav .col-lg-6:last-child, .navbar#settings_nav .col-lg-6:last-child {
+    padding-top: 15px;
+}
+
+.navbar#bottom_nav .nav-tabs, .navbar#settings_nav .nav-tabs {
+    border-bottom: 0;
+}
+
+@media only screen and (max-width: 415px) {
+    .navbar#bottom_nav .col-lg-6:first-child, .navbar#settings_nav .col-lg-6:first-child {
+        padding-top: 15px;
+    }
+}
+
+@media only screen and (min-width: 415px) {
+    .navbar#bottom_nav .col-lg-6:first-child, .navbar#settings_nav .col-lg-6:first-child {
+        padding-top: 30px;
+    }
+}
+
+.row.w-100.flex-column-reverse.flex-lg-row {
+    margin: auto;
+}
+
+#top_nav #user_image {
+    width: 50px;
+    height: auto;
+}
+
+#top_nav .user-name {
+    padding: 0 10px;
+}
+
+#top_nav .dropdown-toggle::after {
+    display: none;
+}
+
+#top_nav li.nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+
+#top_nav a.nav-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+#top_nav a.nav-link span {
+    margin: 0 5px;
+}
+
+#bottom_nav .nav-link.active, #settings_nav .nav-link.active {
+    background-color: #f2f2f2;
+    border-color: transparent;
+}
+
+/* #bottom_nav, #settingsNav { // bug fix: double sticky navbar is messed up when scrolling down
+    top: 82px;
+} */

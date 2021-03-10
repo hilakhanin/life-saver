@@ -1,0 +1,62 @@
+<div class="row-fluid">
+    <div class="col-xs-12">
+
+        <div class="table-wrapper-container mat-elevation-z8">
+
+            <div class="table-container">
+
+                <mat-form-field class="search-form-field" floatLabel="never">
+                    <input matInput [(ngModel)]="searchKey" placeholder="Filter patients..." autocomplete="off" (keyup)="applyFilter()">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <div class="spinner_wrapper" *ngIf="isLoadingResults">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+
+                <mat-table [dataSource]="listData" matSort>
+
+                    <ng-container matColumnDef="idCard">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Identity Card No. </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.idCard }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="isAlive">
+                        <mat-header-cell *matHeaderCellDef> Alive </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.isAlive | yesNo }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateOfBirth">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Birth
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.dateOfBirth | date:'dd/MM/yyyy' }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="dateOfAdmission">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Date of Admission
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">{{ element.dateOfAdmission | date:'dd/MM/yyyy' }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="noData">
+                        <mat-footer-cell *matFooterCellDef colspan="6">
+                            No data.
+                        </mat-footer-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></mat-row>
+
+                    <mat-footer-row *matFooterRowDef="['noData']"
+                        [ngClass]="{ 'hide' : listData != undefined }"></mat-footer-row>
+
+                </mat-table>
+            </div>
+
+            <mat-paginator [pageSize]="10" showFirstLastButtons></mat-paginator>
+
+        </div>
+    </div>
+</div>

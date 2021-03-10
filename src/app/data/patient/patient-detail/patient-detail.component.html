@@ -1,0 +1,220 @@
+<ngb-alert *ngIf="!closed" (close)="closed=true">
+    Patient missing TISS-28 and Apache-2 Scores Please complete this patient's Index Type Results
+</ngb-alert>
+
+<div class="row d-flex w-100 p-4">
+    <div class="col-xs-12 col-sm-6 d-flex w-100">
+
+        <form class="d-block w-100" [formGroup]="patientForm" (ngSubmit)="onSubmit()" *ngIf="patientForm">
+
+            <h1 class="d-flex my-4">{{ editMode ? 'Patient Edit' : 'New Patient' }}</h1>
+
+            <div class="form-group">
+                <label for="idCard">Identity Card No.</label>
+                <mat-form-field appearance="outline">
+                    <!-- TODO: bug with hint appearing inside input instead of just below it -->
+                    <input matInput id="idCard" name="idCard" formControlName="idCard">
+                    <mat-hint
+                        *ngIf="!patientForm.get('idCard').valid && patientForm.get('idCard').touched && patientForm.get('idCard').errors['validIdCard']">
+                        {{ 'app.errors.validIdCard' | translate }}
+                    </mat-hint>
+                    <mat-hint
+                        *ngIf="!patientForm.get('idCard').valid && patientForm.get('idCard').touched && patientForm.get('idCard').errors['duplicateIdCard']">
+                        {{ 'app.errors.duplicateIdCard' | translate }}
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="form-group" style="direction: rtl;">
+                <mat-slide-toggle name="isAlive" formControlName="isAlive">Patient Alive</mat-slide-toggle>
+            </div>
+            <div class="form-group">
+                <label for="dateOfBirth">Date of Birth</label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepicker]="dateOfBirthPicker" name="dateOfBirth" formControlName="dateOfBirth"
+                        [min]="minDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="dateOfBirthPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dateOfBirthPicker color="primary"></mat-datepicker>
+                    <mat-hint *ngIf="!patientForm.get('dateOfBirth').valid && patientForm.get('dateOfBirth').touched">
+                        A valid date of birth must be between 17 and 120 years ago.
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <label for="dateOfAdmission">Date of Admission</label>
+                <mat-form-field appearance="outline">
+                    <input matInput [matDatepickerFilter]="daysInICUFilter" [matDatepicker]="dateOfAdmissionPicker"
+                        name="dateOfAdmission" formControlName="dateOfAdmission">
+                    <mat-datepicker-toggle matSuffix [for]="dateOfAdmissionPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dateOfAdmissionPicker></mat-datepicker>
+                    <mat-hint
+                        *ngIf="!patientForm.get('dateOfAdmission').valid && patientForm.get('dateOfAdmission').touched">
+                        A valid admission date must be up to 2 days ago, to take Days in ICU into consideration
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-slide-toggle name="isNeedsDialysis" formControlName="isNeedsDialysis">Patient Needs Dialysis
+                </mat-slide-toggle>
+            </div>
+            <div class="form-group">
+                <label for="daysInICU">Days in ICU</label>
+                <mat-form-field appearance="outline">
+                    <!-- TODO: bug with hint appearing inside input instead of just below it -->
+                    <input matInput type="number" id="daysInICU" name="daysInICU" formControlName="daysInICU" min="2"
+                        max="60">
+                    <mat-hint *ngIf="!patientForm.get('daysInICU').valid && patientForm.get('daysInICU').touched">
+                        Please allow at least 2 days between admission date and today
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" style="margin-right: 5px;"
+                    [disabled]="!patientForm.valid">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="col-xs-12 col-sm-6">
+        <div class="row">
+            <div class="col-xs-12 col-sm-11 ml-auto">
+                <mat-card>
+                    <label for="patientIndexTypeResults">
+                        <p class="d-flex my-4 lead">Index Type Results</p>
+                    </label>
+                    <mat-accordion>
+                        <mat-expansion-panel *ngFor="let cat of categories" (opened)="getIndexTypeResults(cat.Name)"
+                            [disabled]="!this.editMode">
+                            <mat-expansion-panel-header *ngIf="cat.Id > 0">
+                                <mat-panel-title>
+                                    {{ cat.Name }}
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p *ngIf="!isLoadingResults && results.length === 0" style="padding: 0 24px 16px;"
+                                class="d-flex w-100 justify-content-between align-items-center">
+                                No Index Type Results
+
+                                <button mat-mini-fab color="primary" (click)="addNew()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </p>
+                            <div class="table-wrapper" *ngIf="!isLoadingResults && results.length > 0">
+                                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                                    <ng-container matColumnDef="table-header">
+                                        <th mat-header-cell *matHeaderCellDef colspan="4" class="lead table-header"
+                                            style="background-color: lightsteelblue;">
+                                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                                results
+
+                                                <button mat-icon-button (click)="addNew()">
+                                                    <mat-icon>add</mat-icon>
+                                                </button>
+                                            </div>
+                                        </th>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="IndexTypeName">
+                                        <th mat-header-cell *matHeaderCellDef> Index Type Name </th>
+                                        <td mat-cell *matCellDef="let element">
+
+                                            <mat-form-field appearance="outline" id="IndexTypeNameFormField"
+                                                matTooltip="{{ element.IndexTypeName }}"
+                                                [matTooltipPosition]="position.value">
+
+                                                <input matInput [disabled]="!element.IsEdit"
+                                                    [(ngModel)]="element.IndexTypeName" required
+                                                    [matAutocomplete]="result_auto"
+                                                    (ngModelChange)="applyFilter($event, cat.Id)"
+                                                    (focus)="applyFilter($event.target.value, cat.Id)">
+
+                                                <mat-autocomplete #result_auto="matAutocomplete"
+                                                    (optionSelected)="setNewRowDetails($event)">
+                                                    <mat-option *ngFor="let item of filteredData" [value]="item.Name"
+                                                        [id]="item.ID">
+                                                        {{item.Name}}
+                                                    </mat-option>
+                                                </mat-autocomplete>
+                                            </mat-form-field>
+
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Date">
+                                        <th mat-header-cell *matHeaderCellDef> Date </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <!-- This is a generic use case. When referring specifically to TISS-28 or Apache-2,
+                                                changing this field's content wouldn't mean much, as the dates are
+                                                either one day after admission or one day before discharge, respectively. -->
+                                            <mat-form-field appearance="outline">
+                                                <input matInput [matDatepicker]="resultDatePicker"
+                                                    [disabled]="!element.IsEdit"
+                                                    [ngModel]="element.Date | date:'yyyy-MM-dd'"
+                                                    (ngModelChange)="element.Date = $event" required>
+                                                <mat-datepicker-toggle matSuffix [for]="resultDatePicker">
+                                                </mat-datepicker-toggle>
+                                                <mat-datepicker #resultDatePicker color="primary"></mat-datepicker>
+                                            </mat-form-field>
+
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Result">
+                                        <th mat-header-cell *matHeaderCellDef> Result </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <input type="number" [disabled]="!element.IsEdit"
+                                                [(ngModel)]="element.Result"
+                                                [step]="element.Increment ? element.Increment : (element.IsBoolean ? element.MaxValue : 1)"
+                                                [min]="element.MinValue" [max]="element.MaxValue" required>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="Action">
+                                        <th mat-header-cell *matHeaderCellDef> Actions </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div *ngIf="!element.IsEdit">
+                                                <button mat-icon-button (click)="enableRow(element)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                                <button mat-icon-button (click)="alertDeleteRow(element)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button>
+                                            </div>
+                                            <div *ngIf="element.IsEdit">
+                                                <!-- TODO: bug fix - after selecting an index type and deleting it, it's not possible to proceed -->
+                                                <button mat-icon-button (click)="saveChanges(element)">
+                                                    <mat-icon>save</mat-icon>
+                                                </button>
+                                                <button mat-icon-button (click)="cancel(element)">
+                                                    <mat-icon>clear</mat-icon>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+
+                                    <tr mat-header-row *matHeaderRowDef="['table-header']"
+                                        class="example-second-header-row">
+                                    </tr>
+
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                                </table>
+                            </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </mat-card>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-11 ml-auto mt-3">
+                <mat-card>
+                    <label for="riskGroups">
+                        <p class="d-flex my-4 lead">Rule Risk Groups</p>
+                    </label>
+                    <app-patient-risk-groups [patientIndex]="idCard"></app-patient-risk-groups>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-md-6 col-lg-3">
+        <div class="widget widget-tile" *ngIf="leftTile">
+            <div class="data-icon">
+                <span class="widget-icon">
+                    <mat-icon class="wait" *ngIf="leftTile.isHighRisk == null">hourglass_top</mat-icon>
+                    <mat-icon class="high" *ngIf="leftTile.isHighRisk == true">priority_high</mat-icon>
+                    <mat-icon class="low" *ngIf="leftTile.isHighRisk == false">self_improvement</mat-icon>
+                </span>
+            </div>
+            <div class="data-info">
+                <div class="desc">{{ leftTile.name }}</div>
+                <div class="value">
+                    <span class="number">{{ leftTile.count }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget widget-tile" *ngIf="rightTile">
+            <div class="data-icon">
+                <span class="widget-icon">
+                    <mat-icon class="wait" *ngIf="rightTile.isHighRisk == null">hourglass_bottom</mat-icon>
+                    <mat-icon class="high" *ngIf="rightTile.isHighRisk == true">priority_high</mat-icon>
+                    <mat-icon class="low" *ngIf="rightTile.isHighRisk == false">self_improvement</mat-icon>
+                </span>
+            </div>
+            <div class="data-info">
+                <div class="desc" matTooltip="{{ rightTile.name }}" [matTooltipPosition]="'above'">{{ rightTile.name }}
+                </div>
+                <div class="value">
+                    <span class="number">{{ rightTile.count }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget widget-tile">
+            <div class="data-icon">
+                <span class="widget-icon">
+                    <mat-icon class="sick">sick</mat-icon>
+                </span>
+            </div>
+            <div class="data-info">
+                <div class="desc">Current Patients</div>
+                <div class="value">
+                    <span class="number">{{ countPatients() }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+        <div class="widget widget-tile">
+            <div class="data-icon">
+                <span class="widget-icon">
+                    <mat-icon class="connected">people</mat-icon>
+                </span>
+            </div>
+            <div class="data-info">
+                <div class="desc">Connected Users</div>
+                <div class="value">
+                    <span class="number">1</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

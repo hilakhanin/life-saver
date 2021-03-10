@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>{{ data.graph != null ? 'Edit Graph' : 'Add Graph'}}</h2>
+<mat-dialog-content>
+    <form [formGroup]="graphForm">
+        <!-- Name -->
+        <div class="form-group">
+            <label for="name">Name</label>
+            <mat-form-field appearance="outline">
+                <input matInput type="text" placeholder="Graph Name" formControlName="name">
+            </mat-form-field>
+        </div>
+        <!-- Chart Type -->
+        <div class="form-group">
+            <label for="type">Graph Type</label>
+            <div class="d-flex flex-wrap justify-content-start">
+                <div class="form-check" *ngFor="let type of graphTypes; index as i">
+                    <input class="form-check-input radio_item" type="radio" id="{{ type.Name }}" formControlName="types"
+                        [value]="type.Id" required
+                        [attr.disabled]="!this.graphForm.get('isBoolean').value && type.Name === 'pie_chart' ? 'true' : null">
+                    <label class="form-check-label label_item" for="{{ type.Name }}">
+                        <span class="material-icons widget-icon">
+                            {{ type.Name }}
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-row row-fluid" formGroupName="axes">
+                <!-- X Axis -->
+                <div class="col-md-6 form-group">
+                    <label for="axisX">Axis X</label>
+                    <select class="form-control" formControlName="axisX">
+                        <option *ngFor="let it of index_types" [value]="it.ID">{{ it.Name }}</option>
+                    </select>
+                </div>
+                <!-- Y Axis -->
+                <div class="col-md-6 form-group">
+                    <label for="axisY">Axis Y</label>
+                    <select class="form-control" formControlName="axisY"
+                        [attr.disabled]="this.graphForm.get('isBoolean').value && this.graphForm.get('types').value == 2 ? 'true' : null">
+                        <option *ngFor="let it of index_types" [value]="it.ID">{{ it.Name }}</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-12 form-group help-block">
+                    <div *ngIf="this.graphForm.get('axes')?.errors?.axesXAndYAreTheSame">
+                        {{ 'app.errors.axesXAndYAreTheSame' | translate }}</div>
+                    <div *ngIf="this.graphForm.get('axes')?.errors?.xNotBooleanOrYIsBoolean">
+                        {{ 'app.errors.xNotBooleanOrYIsBoolean' | translate }}</div>
+                    <div *ngIf="this.graphForm.get('axes')?.errors?.barChartAxisCannotBeDates">
+                        {{ 'app.errors.barChartAxisCannotBeDates' | translate }}</div>
+                    <div *ngIf="this.graphForm.get('axes')?.errors?.pieChartAxisMustBeBoolean">
+                        {{ 'app.errors.pieChartAxisMustBeBoolean' | translate }}</div>
+                    <div *ngIf="this.graphForm.get('axes')?.errors?.scatterPlotChartAxisCannotBeDates">
+                        {{ 'app.errors.scatterPlotChartAxisCannotBeDates' | translate }}</div>
+
+                </div>
+
+                <div *ngIf="!this.graphForm.get('axes')?.errors?.axesXAndYAreTheSame &&
+                    !this.graphForm.get('axes')?.errors?.xNotBooleanOrYIsBoolean &&
+                    !this.graphForm.get('axes')?.errors?.barChartAxisCannotBeDates &&
+                    !this.graphForm.get('axes')?.errors?.pieChartAxisMustBeBoolean &&
+                    !this.graphForm.get('axes')?.errors?.scatterPlotChartAxisCannotBeDates">
+                    <div class="col-xs-12 form-group help-block">
+                        <span>&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-between">
+    <div class="form-group">
+        <button type="button" class="btn btn-outline-danger" mat-button (click)="confirmDelete()"
+            [hidden]="!data.graph">Delete</button>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-success" style="margin-right: 5px;" [disabled]="!graphForm.valid"
+            mat-button [mat-dialog-close]="true" (click)="onSubmit()">Save</button>
+        <button type="button" class="btn btn-danger" mat-button mat-dialog-close>Cancel</button>
+    </div>
+</mat-dialog-actions>

@@ -1,0 +1,85 @@
+body {
+    height: 100%;
+    overflow-y: auto;
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #f2f2f2;
+}
+
+button:focus, button:active:focus, button.active:focus {
+    outline: none !important;
+}
+
+.section {
+    background-color: white;
+    padding: 2vw;
+    position: relative;
+    min-height: 620px;
+}
+
+.mat-raised-button.mat-blue_button {
+    background-color: lightsteelblue;
+}
+
+.mat-button.mat-green_button {
+    color: #28a745;
+}
+
+.mat-button.mat-red_button {
+    color: #dc3545;
+}
+
+.section_wrapper {
+    background-color: #fff;
+    position: relative;
+    min-height: 500px;
+}
+
+.spinner_wrapper {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    min-width: -webkit-fill-available;
+}
+
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.help-block {
+    color: red;
+}
+
+.close-button {
+    float: right;
+    top: -24px;
+    right: -24px;
+}
+
+.cdk-overlay-container {
+    z-index: 9999;
+}
+
+/* radio button styling */
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+    border-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+    color: rgb(66, 134, 244);
+    background-color: rgb(66, 134, 244);
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+    background-color: rgb(255, 37, 37, .26);
+}
+
+.mat-radio-group {
+    display: grid;
+    grid-auto-flow: column;
+    grid-column-gap: 10px;
+    grid-auto-columns: max-content;
+}

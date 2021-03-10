@@ -1,0 +1,47 @@
+/* Structure */
+
+.table-wrapper-container {
+    position: relative;
+    height: 500px;
+    overflow-y: scroll;
+}
+
+.table-container {
+    position: relative;
+    max-height: 600px;
+}
+
+table {
+    width: 100%;
+}
+
+.mat-row:hover {
+    background-color: lightsteelblue;
+    cursor: pointer;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+    padding: 5px 15px;
+}
+
+td, th {
+    width: 25%;
+}
+
+/* Column Widths */
+
+.mat-column-number, .mat-column-state {
+    max-width: 64px;
+}
+
+.mat-column-created {
+    max-width: 124px;
+}
+
+/* functionality */
+
+.hide {
+    display: none;
+}

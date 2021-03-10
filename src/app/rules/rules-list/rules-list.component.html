@@ -1,0 +1,14 @@
+<div class="row">
+    <div class="col-xs-12">
+        <button mat-raised-button type="button" (click)="onNewRule()">New Rule</button>
+        <button mat-raised-button type="button" (click)="onFetchData()">Fetch</button>
+        <button mat-raised-button type="button" (click)="onSaveData()">Save</button>
+    </div>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-xs-12" style="width: 100%;">
+        <app-rules-item *ngFor="let ruleEl of rules; let i = index" [rule]="ruleEl" [index]="i"></app-rules-item>
+    </div>
+</div>

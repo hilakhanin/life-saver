@@ -1,0 +1,45 @@
+<div class="widget widget-fullwidth widget-small">
+    <div class="widget-head">
+        <div class="tools">
+            <button mat-icon-button (click)="addGraph()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="title">Graph List</div>
+        <div class="description">Click a graph to setup its chart properties</div>
+    </div>
+    <div class="table-wrapper" id="graph-table">
+
+        <mat-table [dataSource]="listData" matSort>
+
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.Name }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+                <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="material-icons">
+                        {{ element.TypeId | graphType }}
+                    </span>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="noData">
+                <mat-footer-cell *matFooterCellDef colspan="3">
+                    No data.
+                </mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="editGraph(row)"
+                [ngClass]="{ 'current-graph': graph ? row.Id == graph.Id : null }"></mat-row>
+
+            <mat-footer-row *matFooterRowDef="['noData']"
+                [ngClass]="{ 'hide' : listData.data != undefined && listData.data.length > 0 }">
+            </mat-footer-row>
+
+        </mat-table>
+    </div>
+</div>

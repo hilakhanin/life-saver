@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h1>Configuration</h1>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-xl-3">
+                <mat-card id="rule-card">
+                    <form [formGroup]="ruleConfigForm" *ngIf="ruleConfigForm" (ngSubmit)="onSubmit()">
+                        <mat-card-header>
+                            <mat-icon mat-card-avatar>rule</mat-icon>
+                            <mat-card-title>Rules</mat-card-title>
+                            <mat-card-subtitle>Dashboard Tile Rules</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>
+                                Select one or two active rules from the rules list.
+                                <br /><small>Selecting one rule will display how many patients are at both high risk and
+                                    low
+                                    risk according to it. Selecting two rules will show patients at high risk for
+                                    both.</small>
+                            </p>
+                            <div class="d-flex p-2 flex-column w-100">
+                                <div class="p-2 title">Dashboard Tiles</div>
+                                <div class="p-2 flex-row d-flex justify-content-around">
+                                    <div class="row" style="width: 100%;">
+                                        <div class="col-6">
+                                            <app-tile-selector [side]="'left'" [selfIndex]="selectedLeftRule"
+                                                [otherIndex]="selectedRightRule"
+                                                (ruleSelected)="childEventClicked($event)">
+                                            </app-tile-selector>
+                                        </div>
+                                        <div class="col-6">
+                                            <app-tile-selector [side]="'right'" [selfIndex]="selectedRightRule"
+                                                [otherIndex]="selectedLeftRule"
+                                                (ruleSelected)="childEventClicked($event)">
+                                            </app-tile-selector>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button type="submit" mat-button color="green_button" cdkFocusInitial>SAVE</button>
+                            <button type="button" mat-button color="red_button" (click)="onCancel()">CANCEL</button>
+                        </mat-card-actions>
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+
+    </div>
+</div>

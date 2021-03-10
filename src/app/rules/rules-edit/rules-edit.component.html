@@ -1,0 +1,51 @@
+<div class="row mt-5">
+    <div class="col-10 offset-1">
+        <form [formGroup]="ruleForm">
+            <h1>{{ editMode ? 'Edit' : 'New '}} Rule</h1>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+
+            <div class="form-group d-flex align-items-center">
+                <mat-slide-toggle formControlName="isActive">Rule Active
+                </mat-slide-toggle>
+            </div>
+
+            <div class="form-group">
+                <label for="cutoff">Cutoff</label>
+                <input type="number" class="form-control" id="cutoff" step="1" min="0" formControlName="cutoff">
+            </div>
+
+            <div class="form-group">
+                <label for="equation">Equation</label>
+                <ckeditor formControlName="equation" [config]="config" (change)="onEditorChanged($event)">
+                </ckeditor>
+                <div class="mt-3">
+                    <!-- TODO: add errors to here too, when blurring the editor, and maybe replace dialogs -->
+                    <p class="help-block" *ngIf="this.ruleForm.get('equation')?.errors?.nonSecuredEditor">
+                        {{ 'app.rules.dialogs.nonSecuredEditor.content' | translate }}
+                    </p>
+                    <p class="help-block" *ngIf="this.ruleForm.get('equation')?.errors?.indexTypeError">
+                        {{ 'app.rules.dialogs.indexTypeError.content' | translate }}
+                    </p>
+                    <p class="help-block" *ngIf="this.ruleForm.get('equation')?.errors?.evaluationError">
+                        {{ 'app.rules.dialogs.evaluationError.content' | translate }}
+                    </p>
+                    <p class="help-block" *ngIf="!this.ruleForm.get('equation')?.errors?.nonSecuredEditor &&
+                    !this.ruleForm.get('equation')?.errors?.indexTypeError &&
+                    !this.ruleForm.get('equation')?.errors?.evaluationError">
+                        &nbsp;
+                    </p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" style="margin-right: 5px;" [disabled]="!ruleForm.valid"
+                    (click)="onSubmit()">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

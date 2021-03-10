@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex flex-column mb-3">
+            <div class="p-2">
+                <h1>Patients</h1>
+            </div>
+            <div class="p-2">
+                <div class="section">
+                    <div class="mb-4" *ngIf="router === '/data/patient-list'">
+                        <button mat-raised-button color="blue_button" [routerLink]="['./', 'patient', 'new']"
+                            routerLinkActive="active">New Patient</button>
+                        <button class="menu_button" mat-icon-button [matMenuTriggerFor]="menu" disableRipple>
+                            <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                            <!-- bug fix: sometimes the import doesn't start -->
+                            <input type="file" style="display:none;" (change)="importNewPatients($event)" #fileInput>
+                            <button mat-menu-item (click)="fileInput.click();fileInput.value = null;">
+                                <mat-icon>publish</mat-icon>
+                                <span>Import Patients</span>
+                            </button>
+                            <button mat-menu-item (click)="replacePatientsFromExistingFile()">
+                                <mat-icon>cached</mat-icon>
+                                <span>Replace Patients</span>
+                            </button>
+                            <button mat-menu-item (click)="generateFile()">
+                                <mat-icon>table_rows</mat-icon>
+                                <span>Generate Mock File</span>
+                            </button>
+                            <button mat-menu-item (click)="deletePatientsAndResults()">
+                                <mat-icon>delete_forever</mat-icon>
+                                <span>Clear Patients</span>
+                            </button>
+                        </mat-menu>
+                    </div>
+
+                    <div class="section_wrapper mat-elevation-z8">
+                        <router-outlet *ngIf="!isLoading && !isError"></router-outlet>
+                        <div *ngIf="isLoading && !isError" class="spinner_wrapper">
+                            <app-loading-spinner></app-loading-spinner>
+                            <div *ngIf="progress_percent > 0">{{ progress_percent | number : '1.0-0' }}%</div>
+                        </div>
+                        <div class="alert alert-danger" *ngIf="isError">
+                            <p>{{ isError }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+.mat-form-field {
+    display: block;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+    padding: initial;
+}
+
+input:disabled {
+    color: black;
+    cursor: default;
+    background-color: transparent;
+}
+
+.form-check {
+    padding-left: initial;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+    margin: 5px;
+}
+
+.radio_item {
+    display: none !important;
+}
+
+.label_item {
+    opacity: 0.5;
+}
+
+.radio_item:checked+label {
+    opacity: 1;
+}
+
+label {
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 415px) {
+    .widget-icon {
+        font-size: 10vh;
+    }
+}
+
+:host ::ng-deep .mat-form-field-invalid .mat-input-element {
+    border: initial !important;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    box-shadow: 0 0 0 50px white inset;
+}
+
+input:disabled~.label_item {
+    color: #ccc;
+    opacity: 0.5;
+}

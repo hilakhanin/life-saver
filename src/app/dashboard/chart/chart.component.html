@@ -1,0 +1,57 @@
+<div class="widget widget-fullwidth chart">
+    <div class="widget-head">
+        <div class="tools">
+            <button mat-icon-button type="button" (click)="slidePrev()">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <button mat-icon-button type="button" (click)="slideNext()">
+                <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+        </div>
+        <span class="title">Charts</span>
+    </div>
+    <div class="widget-chart-container d-flex w-100">
+        <div class="table-wrapper flex-fill d-flex align-items-center">
+            <div class="flex-fill">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2">
+                        <div *ngIf="!graph" class="flex-fill flex-column" id='fadeInEffect'>
+                            <div class="no_data">
+                                <div *ngIf="patient_data.length > 0;else no_patients">
+                                    <div>
+                                        No charts exist in the system.
+                                        <br />
+                                        Try creating one in the Graph List to the right.
+                                    </div>
+                                    <div>
+                                        <mat-icon class="blinking">
+                                            east
+                                        </mat-icon>
+                                    </div>
+                                </div>
+                                <ng-template #no_patients>
+                                    <div>
+                                        No patients exist in the system.
+                                        <br />
+                                        Try creating some in the Patient List located in the Data tab.
+                                    </div>
+                                    <div>
+                                        <mat-icon class="blinking">
+                                            north
+                                        </mat-icon>
+                                    </div>
+                                </ng-template>
+
+                            </div>
+
+                        </div>
+                        <div *ngIf="chart">
+                            <canvas #canvas [hidden]="!graph">{{ chart }}</canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<router-outlet></router-outlet>

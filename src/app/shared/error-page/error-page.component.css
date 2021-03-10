@@ -1,0 +1,15 @@
+button {
+    /* background-color: #00d085; */
+    background-color: #f8f9fa;
+    margin: 2px;
+}
+
+img {
+    max-width: 40vw;
+}
+
+.error-message {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 410;
+}

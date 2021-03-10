@@ -1,0 +1,78 @@
+<div class="row mt-5">
+    <div class="col-10 offset-1">
+        <form (ngSubmit)="onSubmit()" #f="ngForm">
+            <h1>{{ editMode ? 'Edit' : 'New' }} Index Type</h1>
+
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" [id]="id" [ngModel]="indexType?.Name" #name="ngModel"
+                    name="name" duplicateNameValidator required [value]="indexType?.ID">
+                <span class="help-block" *ngIf="f.controls['name']?.errors?.duplicateNameValidator">
+                    {{ 'app.errors.duplicateNameValidator' | translate }}
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" name="category" required [ngModel]="selectedCategory">
+                    <option *ngFor="let c of categories" [ngValue]="c.Id">{{c.Name}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="isBoolean">Is this Index Type's result a boolean or a range?</label>
+                <div>
+                    <div class="form-check" *ngFor="let b of isBooleanSelect; index as i">
+                        <input class="form-check-input" type="radio" id="{{b.name}}" [(ngModel)]="radioSelected"
+                            [value]="b.name" name="booleanRadios" required>
+                        <label class="form-check-label" for="{{b.name}}">
+                            {{b.name}}
+                        </label>
+                    </div>
+                </div>
+                <small id="isBooleanHelp" class="form-text text-muted">The calculated score could be either the minimum
+                    or the maximum value, not any other number in the range.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="unitOfMeasurement">Unit of Measurement</label>
+                <select class="form-control" id="unitOfMeasurement" name="unitOfMeasurement" required
+                    [ngModel]="selectedUnit">
+                    <option *ngFor="let unit of keys(unitsOfMeasurement)" [ngValue]="unit">{{unitsOfMeasurement[unit]}}
+                    </option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="increment">Increment</label>
+                <input type="number" class="form-control" id="increment" [step]="indexType?.Increment"
+                    [ngModel]="indexType?.Increment" name="increment">
+            </div>
+
+            <div class="form-row">
+                <div class="col-xl-6 form-group">
+                    <label for="minValue">Minimum Value</label>
+                    <input type="number" class="form-control" id="minValue"
+                        [step]="indexType?.Increment ? indexType?.Increment : 1" min="0" [ngModel]="indexType?.MinValue"
+                        name="minValue" required #minValue="ngModel">
+                </div>
+                <div class="col-xl-6 form-group">
+                    <label for="maxValue">Maximum Value</label>
+                    <input type="number" class="form-control" id="maxValue"
+                        [step]="indexType?.Increment ? indexType?.Increment : 1" min="0" [ngModel]="indexType?.MaxValue"
+                        name="maxValue" required #maxValue="ngModel">
+                </div>
+                <div class="col-xs-12 form-group help-block" *ngIf="minValue.value > maxValue.value">
+                    <span>{{ 'app.errors.indexTypeEdit' | translate }}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" style="margin-right: 5px;"
+                    [disabled]="!f.valid">Save</button>
+                <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

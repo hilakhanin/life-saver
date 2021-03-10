@@ -1,0 +1,29 @@
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Rule Name Column -->
+    <ng-container matColumnDef="ruleName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rule Name</th>
+      <td mat-cell *matCellDef="let row">{{row.ruleName}}</td>
+    </ng-container>
+
+    <!-- Risk Level Column -->
+    <ng-container matColumnDef="riskLevel">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Risk Level</th>
+      <td mat-cell *matCellDef="let row">{{row.riskLevel | highLow}}</td>
+    </ng-container>
+
+    <!-- Result Column -->
+    <ng-container matColumnDef="patientRuleResult">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Result for Patient</th>
+      <td mat-cell *matCellDef="let row">{{row.patientRuleResult | number : '1.2-2'}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{'high': row.riskLevel == true, 'low': row.riskLevel == false }"></tr>
+  </table>
+
+  <mat-paginator #paginator [length]="dataSource?.data.length" [pageIndex]="0" [pageSize]="10"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</div>
